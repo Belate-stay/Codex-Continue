@@ -1,6 +1,13 @@
-# Codex-Continue
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.svg">
+    <img src="docs/logo-light.svg" alt="Codex-Continue logo" width="112">
+  </picture>
+</p>
 
-Codex-Continue 是一款面向 Windows 平台的 Codex 自动化续跑工具。Codex 额度耗尽并恢复后，它会自动向指定对话发送继续指令，全程无需人工值守。
+<h1 align="center">Codex-Continue</h1>
+
+<p align="center">Codex-Continue 是一款面向 Windows 平台的 Codex 自动化续跑工具。Codex 额度耗尽并恢复后，它会自动向指定对话发送继续指令，全程无需人工值守。</p>
 
 <p align="center">
   <img src="docs/screenshot.png" alt="Codex-Continue 主界面" width="880">
