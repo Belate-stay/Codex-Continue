@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>CodexContinue</AssemblyName>
+    <RootNamespace>CodexContinue</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <Version>1.0.0</Version>
+    <InformationalVersion>Version 1.0</InformationalVersion>
+    <Product>Codex-Continue</Product>
+  </PropertyGroup>
+
+  <!-- fonts: display (HYSongYunLangHeiW), body (Noto Sans CJK DemiLight); UI font is MS YaHei (system) -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+    <Resource Include="app.ico" />
+    <Resource Include="Assets\OpenAI.svg" />
+    <Resource Include="Fonts\HFSandBeach-2.ttf" />
+    <Resource Include="Fonts\SourceHanSansCN-Medium.ttf" />
+    <Resource Include="Fonts\HYSongYunLangHeiW-1.ttf" />
+    <Resource Include="Fonts\NotoSansCJK-DemiLight-4.otf" />
+    <Resource Include="Fonts\YEFONTColorFonts0831-Color1-2.ttf" />
+    <Resource Include="Textures\grain.png" />
+    <Resource Include="Notices\Octicons-LICENSE.txt" />
+  </ItemGroup>
+  <Target Name="RenamePublishedExecutable" AfterTargets="Publish" Condition="Exists('$(PublishDir)$(AssemblyName).exe')">
+    <Move SourceFiles="$(PublishDir)$(AssemblyName).exe" DestinationFiles="$(PublishDir)Codex-Continue.exe" />
+  </Target>
+</Project>

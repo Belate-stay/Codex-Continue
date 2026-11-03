@@ -1,0 +1,164 @@
+            <!-- ============ buttons (stale-dog-84, Uiverse by Cksunandh) ============
+                 soft twin-shadow key: white glow up-left + dark shadow down-right,
+                 hover = key scales up 1.1 and its shadow deepens, press = 0.95 and
+                 the shadow vanishes. Text renders plain + ClearType (the CSS's
+                 background-clip trick would fuzz glyphs — 文字正常显示). -->
+            <Style x:Key="NeuBtn" TargetType="Button">
+                <Setter Property="Height" Value="44"/>
+                <Setter Property="Padding" Value="20,0"/>
+                <Setter Property="Background" Value="#B5A99D"/>
+                <Setter Property="Foreground" Value="#3A312A"/>
+                <!-- button type: 黑体, ClearType-true -->
+                <Setter Property="FontFamily" Value="SimHei, 黑体, Microsoft YaHei UI"/>
+                <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+                <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="root">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                </Grid.RenderTransform>
+                                <!-- twin shadow casters (siblings, never wrapping glyphs) -->
+                                <Border x:Name="castLight" CornerRadius="20" Background="{TemplateBinding Background}">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="#FFFFFF" Direction="135"
+                                                          ShadowDepth="12" BlurRadius="18" Opacity="0.9"/>
+                                    </Border.Effect>
+                                </Border>
+                                <Border x:Name="castDark" CornerRadius="20" Background="{TemplateBinding Background}">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="#000000" Direction="315"
+                                                          ShadowDepth="11" BlurRadius="13" Opacity="0.22"/>
+                                    </Border.Effect>
+                                </Border>
+                                <Border x:Name="bd" CornerRadius="20" Background="{TemplateBinding Background}"
+                                        BorderBrush="#8C8279" BorderThickness="2">
+                                    <Grid>
+                                        <!-- dangerFace: run/stop state morph — code-behind crossfades it -->
+                                        <Border x:Name="dangerFace" CornerRadius="18" Background="{DynamicResource ErrBrush}" Opacity="0"/>
+                                        <!-- bottom inner shade (the CSS inset 0 -4px) -->
+                                        <Border CornerRadius="20" BorderThickness="0,0,0,4"
+                                                BorderBrush="#2A16110B" IsHitTestVisible="False"/>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                          Margin="{TemplateBinding Padding}"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1.1" Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1.1" Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="castLight"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                                 To="22" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="castLight"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)"
+                                                                 To="18" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="castDark"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)"
+                                                                 To="16" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="castDark"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                                 To="0.32" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1" Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1" Duration="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="castLight"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                                                 To="18" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="castLight"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)"
+                                                                 To="12" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="castDark"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)"
+                                                                 To="11" Duration="0:0:0.3"/>
+                                                <DoubleAnimation Storyboard.TargetName="castDark"
+                                                                 Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+                                                                 To="0.22" Duration="0:0:0.3"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="0.95" Duration="0:0:0.12">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="0.95" Duration="0:0:0.12">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="castLight" Storyboard.TargetProperty="Opacity"
+                                                                 To="0" Duration="0:0:0.12"/>
+                                                <DoubleAnimation Storyboard.TargetName="castDark" Storyboard.TargetProperty="Opacity"
+                                                                 To="0" Duration="0:0:0.12"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1" Duration="0:0:0.2">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="root"
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1" Duration="0:0:0.2">
+                                                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="castLight" Storyboard.TargetProperty="Opacity"
+                                                                 To="1" Duration="0:0:0.2"/>
+                                                <DoubleAnimation Storyboard.TargetName="castDark" Storyboard.TargetProperty="Opacity"
+                                                                 To="1" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="#8B8177"/>
+                                    <Setter Property="Background" Value="#C8BFB5"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="NeuBtnPrimary" TargetType="Button" BasedOn="{StaticResource NeuBtn}">
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>

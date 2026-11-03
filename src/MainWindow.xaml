@@ -1,0 +1,1263 @@
+<Window x:Class="CodexContinue.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CodexContinue"
+        Title="Codex-Continue"
+        Width="1120" Height="730"
+        MinWidth="640" MinHeight="480"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        AllowsTransparency="False"
+        Background="{DynamicResource WindowCanvasBrush}"
+        FontFamily="{DynamicResource UiFont}"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="ClearType"
+        WindowStartupLocation="CenterScreen">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="48" ResizeBorderThickness="6"
+                      GlassFrameThickness="0,0,0,1" CornerRadius="0"
+                      UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid x:Name="LayoutRoot" SizeChanged="RootLayout_SizeChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============ title bar ============ -->
+        <Grid x:Name="TitleBar" Grid.Row="0" Panel.ZIndex="8">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <Image x:Name="TitleIcon" Width="20" Height="20" VerticalAlignment="Center">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <GeometryDrawing Brush="{DynamicResource TextPrimaryBrush}"
+                                                 Geometry="F1 M304.246 295.411V249.828C304.246 245.989 305.687 243.109 309.044 241.191L400.692 188.412C413.167 181.215 428.042 177.858 443.394 177.858C500.971 177.858 537.44 222.482 537.44 269.982C537.44 273.34 537.44 277.179 536.959 281.018L441.954 225.358C436.197 222 430.437 222 424.68 225.358L304.246 295.411ZM518.245 472.945V364.024C518.245 357.304 515.364 352.507 509.608 349.149L389.174 279.096L428.519 256.543C431.877 254.626 434.757 254.626 438.115 256.543L529.762 309.323C556.154 324.679 573.905 357.304 573.905 388.971C573.905 425.436 552.315 459.024 518.245 472.941V472.945ZM275.937 376.982L236.592 353.952C233.235 352.034 231.794 349.154 231.794 345.315V239.756C231.794 188.416 271.139 149.548 324.4 149.548C344.555 149.548 363.264 156.268 379.102 168.262L284.578 222.964C278.822 226.321 275.942 231.119 275.942 237.838V376.986L275.937 376.982ZM360.626 425.922L304.246 394.255V327.083L360.626 295.416L417.002 327.083V394.255L360.626 425.922ZM396.852 571.789C376.698 571.789 357.989 565.07 342.151 553.075L436.674 498.374C442.431 495.017 445.311 490.219 445.311 483.499V344.352L485.138 367.382C488.495 369.299 489.936 372.179 489.936 376.018V481.577C489.936 532.917 450.109 571.785 396.852 571.785V571.789ZM283.134 464.79L191.486 412.01C165.094 396.654 147.343 364.029 147.343 332.362C147.343 295.416 169.415 262.309 203.48 248.393V357.791C203.48 364.51 206.361 369.308 212.117 372.665L332.074 442.237L292.729 464.79C289.372 466.707 286.491 466.707 283.134 464.79ZM277.859 543.48C223.639 543.48 183.813 502.695 183.813 452.314C183.813 448.475 184.294 444.636 184.771 440.797L279.295 495.498C285.051 498.856 290.812 498.856 296.568 495.498L417.002 425.927V471.509C417.002 475.349 415.562 478.229 412.204 480.146L320.557 532.926C308.081 540.122 293.206 543.48 277.854 543.48H277.859ZM396.852 600.576C454.911 600.576 503.37 559.313 514.41 504.612C568.149 490.696 602.696 440.315 602.696 388.976C602.696 355.387 588.303 322.762 562.392 299.25C564.791 289.173 566.231 279.096 566.231 269.024C566.231 200.411 510.571 149.067 446.274 149.067C433.322 149.067 420.846 150.984 408.37 155.305C386.775 134.192 357.026 120.758 324.4 120.758C266.342 120.758 217.883 162.02 206.843 216.721C153.104 230.637 118.557 281.018 118.557 332.357C118.557 365.946 132.95 398.571 158.861 422.083C156.462 432.16 155.022 442.237 155.022 452.309C155.022 520.922 210.682 572.266 274.978 572.266C287.931 572.266 300.407 570.349 312.883 566.028C334.473 587.141 364.222 600.576 396.852 600.576Z"/>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+                <TextBlock x:Name="TitleName" Text="Codex-Continue" FontSize="19"
+                           FontFamily="./Fonts/#YEFONT Color Fonts0831 Color1"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           VerticalAlignment="Center" Margin="10,7,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button x:Name="BtnMin" Style="{StaticResource CaptionBtn}" Click="BtnMin_Click">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="10" Text="&#xE921;"/>
+                </Button>
+                <Button x:Name="BtnMaximize" Style="{StaticResource CaptionBtn}" Click="BtnMaximize_Click">
+                    <TextBlock x:Name="MaximizeGlyph" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="10" Text="&#xE922;"/>
+                </Button>
+                <Button x:Name="BtnClose" Style="{StaticResource CaptionCloseBtn}" Click="BtnClose_Click">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="10" Text="&#xE8BB;"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- ============ tab bar: segmented control + tools ============ -->
+        <Grid x:Name="TabRow" Grid.Row="1" MaxWidth="1440" SizeChanged="ModeTrack_SizeChanged">
+            <Path x:Name="ModeTrackFace" Fill="{DynamicResource PillBrush}" Stretch="None" IsHitTestVisible="False"/>
+            <Grid x:Name="ModePillLayer" IsHitTestVisible="False">
+                <Border x:Name="ModePill" Background="{DynamicResource ModeSelectedBrush}" CornerRadius="9"
+                        BorderBrush="Transparent" BorderThickness="0"
+                        Height="34" Width="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                        UseLayoutRounding="False" SnapsToDevicePixels="False">
+                    <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
+                </Border>
+            </Grid>
+            <Border x:Name="RunModeTrack" Background="Transparent" CornerRadius="12" Padding="4"
+                    HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" SizeChanged="ModeTrack_SizeChanged">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="TabAuto" Style="{StaticResource ModeNav}" Content="自动续跑"
+                                 Tag="Auto" Checked="Navigation_Checked"/>
+                    <RadioButton x:Name="TabManual" Style="{StaticResource ModeNav}" Content="手动定时"
+                                 Tag="Manual" Margin="2,0,0,0" Checked="Navigation_Checked"/>
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,16,0">
+                <Border Background="{DynamicResource PillBrush}" CornerRadius="12" Padding="4" Margin="0,0,8,0">
+                    <Button x:Name="BtnGithub" Style="{StaticResource GithubButton}"
+                            Tag="https://github.com/Belate-stay/Codex-Continue/" Click="BtnGithub_Click"
+                            MouseEnter="BtnGithub_MouseEnter" MouseLeave="BtnGithub_MouseLeave" ToolTip="GitHub · 项目仓库">
+                        <Viewbox Width="18" Height="18">
+                            <!-- GitHub Octicons mark-github-16; MIT notice embedded in the executable. -->
+                            <Path Width="16" Height="16" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  Data="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"/>
+                        </Viewbox>
+                    </Button>
+                </Border>
+                <Border x:Name="ToolModeTrack" Background="Transparent" CornerRadius="12" Padding="4" SizeChanged="ModeTrack_SizeChanged">
+                    <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="BtnLog" AutomationProperties.AutomationId="BtnLog" Style="{StaticResource ModeNav}"
+                                 Width="36" Height="34" Padding="0" Tag="Log" Checked="Navigation_Checked" ToolTip="发送日志">
+                        <!-- The alternate icon follows the selected mode. -->
+                        <Viewbox Width="18" Height="18">
+                            <Path x:Name="IconLog" Width="24" Height="24" Stretch="Fill"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                  StrokeThickness="2" StrokeLineJoin="Round"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                        </Viewbox>
+                    </RadioButton>
+                    <RadioButton x:Name="BtnSettings" AutomationProperties.AutomationId="BtnSettings" Style="{StaticResource ModeNav}"
+                                 Width="36" Height="34" Padding="0" Tag="Settings" Checked="Navigation_Checked" ToolTip="设置" Margin="4,0,0,0">
+                        <Viewbox Width="18" Height="18">
+                            <Path x:Name="IconGear" Width="24" Height="24" Stretch="Fill"
+                                  Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"
+                                  StrokeThickness="2" StrokeLineJoin="Round"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                        </Viewbox>
+                    </RadioButton>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Shared viewport; only opacity changes during mode navigation. -->
+        <Grid x:Name="ContentHost" Grid.Row="2" MaxWidth="1440">
+            <ScrollViewer x:Name="RunScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                <ScrollViewer.Resources><Style TargetType="ScrollBar" BasedOn="{StaticResource UpdateScrollBar}"/></ScrollViewer.Resources>
+            <Grid x:Name="RunPage" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- ============ hero: quota readout ============ -->
+                <ContentControl x:Name="HeroCard" Grid.Row="0" Style="{StaticResource NeuCard}" Margin="20,6,20,0" Padding="28,18,28,20">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- reading row: big value left, detection time right -->
+                        <Grid Grid.Row="0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                <TextBlock x:Name="QuotaPct" Text="—"
+                                           FontFamily="{DynamicResource DisplayFont}" FontSize="72"
+                                           LineHeight="68" LineStackingStrategy="BlockLineHeight"
+                                           Typography.NumeralAlignment="Tabular"
+                                           Foreground="{DynamicResource QuotaBlueBrush}"
+                                           VerticalAlignment="Bottom"/>
+                                <TextBlock x:Name="QuotaSign" Text="%" Visibility="Collapsed"
+                                           FontFamily="{DynamicResource DisplayFont}" FontSize="32"
+                                           Foreground="{DynamicResource QuotaBlueBrush}"
+                                           VerticalAlignment="Bottom" Margin="2,0,0,10"/>
+                                <TextBlock x:Name="QuotaLabel" Text="五小时窗口额度" FontSize="13"
+                                           FontFamily="{DynamicResource BodyFont}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           VerticalAlignment="Bottom" Margin="12,0,0,5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <TextBlock x:Name="LblDetect" FontSize="12.5"
+                                           FontFamily="{DynamicResource BodyFont}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           VerticalAlignment="Bottom" Margin="0,0,10,6"/>
+                                <TextBlock x:Name="QuotaTime" Text="--:--"
+                                           FontFamily="{DynamicResource DisplayFont}" FontSize="32"
+                                           Typography.NumeralAlignment="Tabular"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"
+                                           VerticalAlignment="Bottom"/>
+                            </StackPanel>
+                        </Grid>
+                        <!-- meter -->
+                        <Grid x:Name="QuotaTrack" Grid.Row="1" Height="10" Margin="0,18,0,0"
+                              SizeChanged="QuotaTrack_SizeChanged">
+                            <Border Background="{DynamicResource TrackBrush}" CornerRadius="5"/>
+                            <Border x:Name="QuotaTrail" HorizontalAlignment="Left" Width="0" Visibility="Collapsed"
+                                    Background="{DynamicResource QuotaTrailBrush}" CornerRadius="5"/>
+                            <Border x:Name="QuotaFill" HorizontalAlignment="Left" Width="0"
+                                    Background="{DynamicResource QuotaBlueBrush}" CornerRadius="5" SizeChanged="QuotaFill_SizeChanged"/>
+                        </Grid>
+                    </Grid>
+                </ContentControl>
+
+                <!-- ============ content: status card | command card ============ -->
+                <Grid x:Name="CardsRow" Grid.Row="1" Margin="20,16,20,20">
+                    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="384"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- left: status -->
+                    <ContentControl x:Name="StatusCard" Grid.Column="0" Style="{StaticResource NeuCard}" Padding="22,16,22,10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4,0,0,6">
+                                <Rectangle Width="4" Height="16" RadiusX="2" RadiusY="2" Margin="0,0,10,0"
+                                           VerticalAlignment="Center" Fill="{DynamicResource AccentBrush}"/>
+                                <TextBlock x:Name="TitleStatus" Text="状态检测" Style="{StaticResource SectionTitle}"/>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128"/><ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE7F4;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                   Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="LblWindow" Text="Codex 窗口" FontSize="15"
+                                                   FontFamily="./Fonts/#HYSongYunLangHeiW"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <!-- neutral until the probe paints the truth — never boot claiming 在线 -->
+                                        <Ellipse x:Name="WindowDot" Width="8" Height="8" Fill="{DynamicResource TextTertiaryBrush}" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="ValWindow" Text="-- --" FontSize="13.5" Margin="8,0,0,0"
+                                                   FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                                                   Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Rectangle Grid.Row="1" Height="1" Fill="{DynamicResource HairlineBrush}"/>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128"/><ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE77B;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                   Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="LblAccount" Text="账号名称" FontSize="15"
+                                                   FontFamily="./Fonts/#HYSongYunLangHeiW"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="ValAccount" Grid.Column="1" Text="-- --" FontSize="13.5"
+                                               FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Rectangle Grid.Row="3" Height="1" Fill="{DynamicResource HairlineBrush}"/>
+                                <Grid Grid.Row="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128"/><ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE8BD;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                   Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="LblConvos" Text="运行对话" FontSize="15"
+                                                   FontFamily="./Fonts/#HYSongYunLangHeiW"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="ValConvos" Grid.Column="1" Text="0" FontSize="13.5"
+                                               FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Rectangle Grid.Row="5" Height="1" Fill="{DynamicResource HairlineBrush}"/>
+                                <Grid Grid.Row="6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128"/><ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE9D9;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                   Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="LblQuota" Text="额度状态" FontSize="15"
+                                                   FontFamily="./Fonts/#HYSongYunLangHeiW"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="ValQuota" Grid.Column="1" Text="-- --" FontSize="13.5"
+                                               FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Rectangle Grid.Row="7" Height="1" Fill="{DynamicResource HairlineBrush}"/>
+                                <Grid Grid.Row="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128"/><ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE823;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                   Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="LblReset" Text="恢复时间" FontSize="15"
+                                                   FontFamily="./Fonts/#HYSongYunLangHeiW"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="ValReset" Grid.Column="1" Text="-- --" FontSize="13.5"
+                                               FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                                </Grid>
+                                <Rectangle Grid.Row="9" Height="1" Fill="{DynamicResource HairlineBrush}"/>
+                                <Grid Grid.Row="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128"/><ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xE721;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                   Foreground="{DynamicResource TextTertiaryBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="LblSource" Text="检测来源" FontSize="15"
+                                                   FontFamily="./Fonts/#HYSongYunLangHeiW"
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="ValSource" Grid.Column="1" Text="-- --" FontSize="13.5"
+                                               FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </ContentControl>
+
+                    <!-- right: command -->
+                    <ContentControl x:Name="CommandCard" Grid.Column="1" Style="{StaticResource NeuCard}" Padding="22,16,22,16" Margin="16,0,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4,0,0,10">
+                                <Rectangle Width="4" Height="16" RadiusX="2" RadiusY="2" Margin="0,0,10,0"
+                                           VerticalAlignment="Center" Fill="{DynamicResource AccentBrush}"/>
+                                <TextBlock x:Name="TitleCommand" Text="续跑指令" Style="{StaticResource SectionTitle}"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="1" x:Name="LblPrompt" Style="{StaticResource FieldLabel}" Margin="4,0,0,8"/>
+
+                            <Grid Grid.Row="2">
+                                <!-- A blurred backing keeps prompt focus visible without a hard outline. -->
+                                <Border x:Name="PromptRing" CornerRadius="14" Margin="0"
+                                        Background="{DynamicResource FocusRingBrush}" Opacity="0" IsHitTestVisible="False">
+                                    <Border.Effect><BlurEffect Radius="6"/></Border.Effect>
+                                </Border>
+                                <TextBox x:Name="BoxPrompt" Style="{StaticResource NeuInput}" Height="136"
+                                         AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"
+                                         TextChanged="BoxPrompt_TextChanged"
+                                         GotKeyboardFocus="BoxPrompt_FocusChanged"
+                                         LostKeyboardFocus="BoxPrompt_FocusChanged"/>
+                                <!-- hint sits exactly at the text origin (border 1 + padding 16/13);
+                                     lighter face + weight than typed text so it reads as affordance.
+                                     仅当 为空 且 未聚焦 时显示（用户口径） -->
+                                <TextBlock x:Name="PromptHint" IsHitTestVisible="False" FontSize="14"
+                                           FontFamily="Microsoft YaHei UI, Microsoft YaHei" Margin="17,14,17,0"
+                                           VerticalAlignment="Top" Foreground="{DynamicResource TextTertiaryBrush}"
+                                           Visibility="Collapsed"/>
+                            </Grid>
+
+                            <!-- attachments + (manual) send time -->
+                            <Grid Grid.Row="3" Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" x:Name="LblAttach" Style="{StaticResource FieldLabel}"
+                                           VerticalAlignment="Center" Margin="4,0,0,0"/>
+                                <WrapPanel Grid.Column="1" x:Name="AttachList" Orientation="Horizontal"
+                                            VerticalAlignment="Center" Margin="14,0,14,0" MinHeight="44">
+                                    <Button x:Name="BtnAttach" AutomationProperties.AutomationId="BtnAttach"
+                                            Style="{StaticResource AttachBtn}" Margin="0,0,10,0"
+                                            Click="BtnAttach_Click" ToolTip="添加附件">
+                                        <TextBlock FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="16" Text="&#xE710;"/>
+                                    </Button>
+                                </WrapPanel>
+                                <!-- manual mode only -->
+                                <StackPanel x:Name="SendTimePanel" Grid.Column="2" Orientation="Horizontal" Visibility="Collapsed"
+                                            VerticalAlignment="Center">
+                                    <StackPanel x:Name="SendTimeContent" Orientation="Horizontal">
+                                        <TextBlock x:Name="LblSendTime" Text="· 发送时间" Style="{StaticResource FieldLabel}"
+                                                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox x:Name="BoxSendTime" AutomationProperties.AutomationId="BoxSendTime"
+                                                     Style="{StaticResource NeuInput}" Width="150" Height="44" Padding="12,6"
+                                                     VerticalContentAlignment="Center" Typography.NumeralAlignment="Tabular"
+                                                     TextChanged="BoxSendTime_TextChanged"
+                                                     ToolTip="发送时刻，可直接编辑，格式 2:43 / 02:43 / 10月27日 2:43"/>
+                                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="3,0,0,0" VerticalAlignment="Center">
+                                                <RepeatButton x:Name="SpnUp" Width="24" Height="19" Click="SpnUp_Click"
+                                                              Focusable="False" Delay="400" Interval="80">
+                                                    <RepeatButton.Template>
+                                                        <ControlTemplate TargetType="RepeatButton">
+                                                            <Border x:Name="bd" Background="Transparent" CornerRadius="5">
+                                                                <TextBlock Text="&#xE70E;" FontFamily="Segoe Fluent Icons, Segoe UI"
+                                                                           FontSize="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                           Foreground="{DynamicResource AccentInkBrush}"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="bd" Property="Background" Value="{DynamicResource ButtonHoverBrush}"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </RepeatButton.Template>
+                                                </RepeatButton>
+                                                <RepeatButton x:Name="SpnDown" Width="24" Height="19" Click="SpnDown_Click"
+                                                              Focusable="False" Delay="400" Interval="80">
+                                                    <RepeatButton.Template>
+                                                        <ControlTemplate TargetType="RepeatButton">
+                                                            <Border x:Name="bd" Background="Transparent" CornerRadius="5">
+                                                                <TextBlock Text="&#xE70D;" FontFamily="Segoe Fluent Icons, Segoe UI"
+                                                                           FontSize="9" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                           Foreground="{DynamicResource AccentInkBrush}"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="bd" Property="Background" Value="{DynamicResource ButtonHoverBrush}"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </RepeatButton.Template>
+                                                </RepeatButton>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- conversation picker (its own row; hidden entirely when empty —
+                                 用户：空的就别摆一个空下拉卡。初始 Collapsed，扫描带回内容才显示) -->
+                            <Grid x:Name="ConvoRow" Grid.Row="4" Margin="0,12,0,0" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock x:Name="LblConvo" Style="{StaticResource FieldLabel}" Margin="4,0,0,0"
+                                               VerticalAlignment="Center"/>
+                                    <ComboBox x:Name="ConvoPick" Margin="12,0,0,0" Width="380"
+                                              IsSynchronizedWithCurrentItem="False"
+                                              FontFamily="{DynamicResource BodyFont}" FontSize="13" Focusable="False"
+                                              Foreground="{DynamicResource TextPrimaryBrush}"
+                                              SelectionChanged="ConvoPick_SelectionChanged">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <!-- star column constrains the name so CharacterEllipsis
+                                                     actually fires (a StackPanel never trims its children) -->
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Text="{Binding Name}" FontSize="13"
+                                                               FontFamily="{DynamicResource BodyFont}"
+                                                               ToolTip="{Binding Name}"
+                                                               TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                                    <Border Grid.Column="1" Style="{StaticResource NeuChip}" Margin="10,0,0,0"
+                                                            Padding="7,2" CornerRadius="6"
+                                                            Visibility="{Binding Running, Converter={StaticResource BoolToVis}}">
+                                                        <TextBlock Text="{DynamicResource ThreadRunningText}" FontSize="11"
+                                                                   Foreground="{DynamicResource OkBrush}"/>
+                                                    </Border>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                        <ComboBox.Template>
+                                            <ControlTemplate TargetType="ComboBox">
+                                                <Grid>
+                                                    <!-- the ToggleButton is what actually opens the dropdown -->
+                                                    <ToggleButton x:Name="toggle" Focusable="False"
+                                                                  Foreground="{TemplateBinding Foreground}"
+                                                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                                        <ToggleButton.Template>
+                                                            <ControlTemplate TargetType="ToggleButton">
+                                                                <Border x:Name="bd" Background="{DynamicResource CanvasBrush}" CornerRadius="12"
+                                                                        local:ConversationMenuMotion.BottomRadius="12"
+                                                                        BorderBrush="Transparent" BorderThickness="1" ClipToBounds="True">
+                                                                    <Grid>
+                                                                        <Border x:Name="hoverOverlay" CornerRadius="{Binding CornerRadius, ElementName=bd}" Background="{DynamicResource SurfaceHoverBrush}" Opacity="0"/>
+                                                                        <Border x:Name="pressOverlay" CornerRadius="{Binding CornerRadius, ElementName=bd}" Background="{DynamicResource SurfacePressedBrush}" Opacity="0"/>
+                                                                        <ContentPresenter/>
+                                                                    </Grid>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Trigger.EnterActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation Storyboard.TargetName="hoverOverlay" Storyboard.TargetProperty="Opacity"
+                                                                                                     To="1" Duration="0:0:0.12">
+                                                                                        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                                    </DoubleAnimation>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.EnterActions>
+                                                                        <Trigger.ExitActions>
+                                                                            <BeginStoryboard>
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation Storyboard.TargetName="hoverOverlay" Storyboard.TargetProperty="Opacity"
+                                                                                                     To="0" Duration="0:0:0.12"/>
+                                                                                </Storyboard>
+                                                                            </BeginStoryboard>
+                                                                        </Trigger.ExitActions>
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <!-- open state: the box sheds its bottom edge so the
+                                                                             list below reads as one continuous drawer — no
+                                                                             press tint, the faces must match tone for the seam -->
+                                                                        <Setter TargetName="bd" Property="BorderThickness" Value="1,1,1,0"/>
+                                                                        <!-- Preserve the hidden stroke's space so the row does not shrink. -->
+                                                                        <Setter TargetName="bd" Property="Padding" Value="0,0,0,1"/>
+                                                                        <Trigger.EnterActions>
+                                                                            <BeginStoryboard><Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="bd" Storyboard.TargetProperty="(local:ConversationMenuMotion.BottomRadius)"
+                                                                                                 To="0" Duration="{x:Static local:ConversationMenuMotion.HoverDuration}">
+                                                                                    <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                                </DoubleAnimation>
+                                                                            </Storyboard></BeginStoryboard>
+                                                                        </Trigger.EnterActions>
+                                                                        <Trigger.ExitActions>
+                                                                            <BeginStoryboard><Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="bd" Storyboard.TargetProperty="(local:ConversationMenuMotion.BottomRadius)"
+                                                                                                 To="12" Duration="{x:Static local:ConversationMenuMotion.RestDuration}">
+                                                                                    <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+                                                                                </DoubleAnimation>
+                                                                            </Storyboard></BeginStoryboard>
+                                                                        </Trigger.ExitActions>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </ToggleButton.Template>
+                                                        <Grid Margin="14,0" Height="44">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="24"/><ColumnDefinition Width="*"/><ColumnDefinition Width="20"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Text="&#xE8BD;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="14"
+                                                                       Foreground="{DynamicResource TextTertiaryBrush}" VerticalAlignment="Center"/>
+                                                            <ContentPresenter x:Name="cp" Content="{TemplateBinding SelectionBoxItem}"
+                                                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                                              Grid.Column="1" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                                            <TextBlock x:Name="ConvoPlaceholder" Grid.Column="1" Margin="0,0,8,0"
+                                                                       Text="{DynamicResource ConversationPlaceholderText}" Visibility="Collapsed"
+                                                                       Foreground="{DynamicResource TextTertiaryBrush}" VerticalAlignment="Center"
+                                                                       IsHitTestVisible="False"/>
+                                                            <Path x:Name="arrow" Grid.Column="2" Data="M 0 0 L 4.5 4.5 L 9 0"
+                                                                  Stroke="{DynamicResource TextSecondaryBrush}"
+                                                                  StrokeThickness="1.4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                                  StrokeLineJoin="Round" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                                <Path.RenderTransform>
+                                                                    <RotateTransform Angle="0" CenterX="4.5" CenterY="2.25"/>
+                                                                </Path.RenderTransform>
+                                                            </Path>
+                                                        </Grid>
+                                                    </ToggleButton>
+                                                    <!-- popup sits flush under the box: drop face shares the box face and
+                                                         an open top edge, so the list grows out of the box instead of
+                                                         floating as a separate card. margins live on the child borders
+                                                         (a Grid honors child margins; Popup root margins do NOT shift the
+                                                         content) — HorizontalOffset=-6 cancels the left margin exactly. -->
+                                                    <!-- Fade keeps the native popup alive for its 150ms exit; a template
+                                                         exit Storyboard alone runs after the window is already hidden. -->
+                                                    <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PopupAnimation="{x:Static local:ConversationMenuMotion.PopupEffect}"
+                                                           VerticalOffset="-1" HorizontalOffset="-6"
+                                                           IsOpen="{TemplateBinding IsDropDownOpen}">
+                                                        <Grid x:Name="drop">
+                                                            <!-- soft shadow: DropShadowEffect ignores Color alpha — the fade
+                                                                 lives in Effect.Opacity (the NeuCard recipe), not in the hex -->
+                                                            <Border x:Name="MenuShadow" Margin="6,0,6,10" Background="{DynamicResource CanvasBrush}" CornerRadius="0,0,12,12">
+                                                                <Border.RenderTransform><ScaleTransform ScaleY="0"/></Border.RenderTransform>
+                                                                <Border.Effect>
+                                                                    <DropShadowEffect Color="#1A2233" Direction="270"
+                                                                                      ShadowDepth="2" BlurRadius="16" Opacity="0.13"/>
+                                                                </Border.Effect>
+                                                            </Border>
+                                                            <!-- Six complete 40px rows + 12px padding + bottom border.
+                                                                 The shadow stays on its sibling so text remains sharp. -->
+                                                            <Border x:Name="MenuFace" Margin="6,0,6,10" Background="{DynamicResource CanvasBrush}" CornerRadius="0,0,12,12"
+                                                                    local:ConversationMenuMotion.Reveal="0"
+                                                                    BorderBrush="Transparent" BorderThickness="1,0,1,1"
+                                                                    Padding="6" MaxHeight="253" ClipToBounds="True"
+                                                                    HorizontalAlignment="Left"
+                                                                    Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                                                                <ScrollViewer x:Name="MenuScroll" VerticalScrollBarVisibility="Auto" CanContentScroll="True"
+                                                                              HorizontalScrollBarVisibility="Disabled">
+                                                                    <!-- Keep the popup bounds fixed: moving its root shifts the
+                                                                         placement origin on reopening and leaves a visible gap. -->
+                                                                    <ScrollViewer.RenderTransform><TranslateTransform Y="-4"/></ScrollViewer.RenderTransform>
+                                                                    <ScrollViewer.Resources>
+                                                                        <!-- The 3px face grows to 6px without moving its 10px drag target. -->
+                                                                        <Style x:Key="MenuScrollBar" TargetType="ScrollBar">
+                                                                            <Setter Property="Background" Value="Transparent"/>
+                                                                            <Setter Property="Width" Value="10"/>
+                                                                            <Setter Property="MinWidth" Value="0"/>
+                                                                            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                                                                            <Setter Property="Template">
+                                                                                <Setter.Value>
+                                                                                    <ControlTemplate TargetType="ScrollBar">
+                                                                                        <Grid Background="Transparent">
+                                                                                            <Track x:Name="PART_Track" IsDirectionReversed="True"
+                                                                                                   Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}"
+                                                                                                   Value="{TemplateBinding Value}" ViewportSize="{TemplateBinding ViewportSize}">
+                                                                                                <Track.DecreaseRepeatButton>
+                                                                                                    <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}"
+                                                                                                                  Opacity="0" Focusable="False"/>
+                                                                                                </Track.DecreaseRepeatButton>
+                                                                                                <Track.IncreaseRepeatButton>
+                                                                                                    <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}"
+                                                                                                                  Opacity="0" Focusable="False"/>
+                                                                                                </Track.IncreaseRepeatButton>
+                                                                                                <Track.Thumb>
+                                                                                                    <Thumb MinHeight="24">
+                                                                                                        <Thumb.Template>
+                                                                                                            <ControlTemplate TargetType="Thumb">
+                                                                                                                <Grid Background="Transparent">
+                                                                                                                    <Border x:Name="ThumbFace" Width="6" HorizontalAlignment="Center"
+                                                                                                                            Background="{DynamicResource TextSecondaryBrush}"
+                                                                                                                            CornerRadius="3" Margin="0,2" Opacity="0.45" RenderTransformOrigin="0.5,0.5">
+                                                                                                                        <Border.RenderTransform><ScaleTransform ScaleX="0.5"/></Border.RenderTransform>
+                                                                                                                    </Border>
+                                                                                                                </Grid>
+                                                                                                                <ControlTemplate.Triggers>
+                                                                                                                    <MultiDataTrigger>
+                                                                                                                        <MultiDataTrigger.Conditions>
+                                                                                                                            <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ScrollBar}}" Value="False"/>
+                                                                                                                            <Condition Binding="{Binding IsDragging, RelativeSource={RelativeSource Self}}" Value="False"/>
+                                                                                                                        </MultiDataTrigger.Conditions>
+                                                                                                                        <MultiDataTrigger.EnterActions>
+                                                                                                                            <BeginStoryboard><Storyboard>
+                                                                                                                                <DoubleAnimation Storyboard.TargetName="ThumbFace" Storyboard.TargetProperty="Opacity"
+                                                                                                                                                 To="0.45" Duration="{x:Static local:ConversationMenuMotion.RestDuration}">
+                                                                                                                                    <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                                                                                </DoubleAnimation>
+                                                                                                                                <DoubleAnimation Storyboard.TargetName="ThumbFace" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                                                                                                 To="0.5" Duration="{x:Static local:ConversationMenuMotion.RestDuration}">
+                                                                                                                                    <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                                                                                </DoubleAnimation>
+                                                                                                                            </Storyboard></BeginStoryboard>
+                                                                                                                        </MultiDataTrigger.EnterActions>
+                                                                                                                        <MultiDataTrigger.ExitActions>
+                                                                                                                            <BeginStoryboard><Storyboard>
+                                                                                                                                <DoubleAnimation Storyboard.TargetName="ThumbFace" Storyboard.TargetProperty="Opacity"
+                                                                                                                                                 To="0.85" Duration="{x:Static local:ConversationMenuMotion.HoverDuration}">
+                                                                                                                                    <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                                                                                </DoubleAnimation>
+                                                                                                                                <DoubleAnimation Storyboard.TargetName="ThumbFace" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                                                                                                 To="1" Duration="{x:Static local:ConversationMenuMotion.HoverDuration}">
+                                                                                                                                    <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                                                                                </DoubleAnimation>
+                                                                                                                            </Storyboard></BeginStoryboard>
+                                                                                                                        </MultiDataTrigger.ExitActions>
+                                                                                                                    </MultiDataTrigger>
+                                                                                                                    <Trigger Property="IsDragging" Value="True">
+                                                                                                                        <Setter TargetName="ThumbFace" Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                                                                                                    </Trigger>
+                                                                                                                </ControlTemplate.Triggers>
+                                                                                                            </ControlTemplate>
+                                                                                                        </Thumb.Template>
+                                                                                                    </Thumb>
+                                                                                                </Track.Thumb>
+                                                                                            </Track>
+                                                                                        </Grid>
+                                                                                    </ControlTemplate>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Style>
+                                                                    </ScrollViewer.Resources>
+                                                                    <ScrollViewer.Template>
+                                                                        <ControlTemplate TargetType="ScrollViewer">
+                                                                            <Grid>
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/>
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                                                                        CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                                                                        Content="{TemplateBinding Content}"
+                                                                                                        ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                                                                                <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="1"
+                                                                                           Style="{StaticResource MenuScrollBar}" Orientation="Vertical"
+                                                                                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                                                           Maximum="{TemplateBinding ScrollableHeight}"
+                                                                                           ViewportSize="{TemplateBinding ViewportHeight}"
+                                                                                           Value="{Binding VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
+                                                                            </Grid>
+                                                                        </ControlTemplate>
+                                                                    </ScrollViewer.Template>
+                                                                    <ItemsPresenter/>
+                                                                </ScrollViewer>
+                                                            </Border>
+                                                        </Grid>
+                                                    </Popup>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="SelectedIndex" Value="-1">
+                                                        <Setter TargetName="ConvoPlaceholder" Property="Visibility" Value="Visible"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsDropDownOpen" Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="MenuFace" Storyboard.TargetProperty="(local:ConversationMenuMotion.Reveal)"
+                                                                                     To="1" Duration="{x:Static local:ConversationMenuMotion.EnterDuration}">
+                                                                        <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="MenuShadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                                     To="1" Duration="{x:Static local:ConversationMenuMotion.EnterDuration}">
+                                                                        <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <!-- Only the reveal and shadow grow; glyphs never stretch. -->
+                                                                    <DoubleAnimation Storyboard.TargetName="MenuScroll"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                                                     To="0" Duration="{x:Static local:ConversationMenuMotion.EnterDuration}">
+                                                                        <DoubleAnimation.EasingFunction><QuarticEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="arrow"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                                                     To="180" Duration="{x:Static local:ConversationMenuMotion.HoverDuration}">
+                                                                        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="MenuFace" Storyboard.TargetProperty="(local:ConversationMenuMotion.Reveal)"
+                                                                                     To="0" Duration="{x:Static local:ConversationMenuMotion.ExitDuration}">
+                                                                        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseIn"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="MenuShadow" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                                     To="0" Duration="{x:Static local:ConversationMenuMotion.ExitDuration}">
+                                                                        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseIn"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="MenuScroll"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                                                     To="-4" Duration="{x:Static local:ConversationMenuMotion.ExitDuration}">
+                                                                        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseIn"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                    <DoubleAnimation Storyboard.TargetName="arrow"
+                                                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                                                     To="0" Duration="{x:Static local:ConversationMenuMotion.ExitDuration}">
+                                                                        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                                                                    </DoubleAnimation>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </ComboBox.Template>
+                                        <ComboBox.ItemContainerStyle>
+                                            <Style TargetType="ComboBoxItem">
+                                                <Setter Property="Height" Value="40"/>
+                                                <Setter Property="Padding" Value="12,0"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                <Setter Property="FontFamily" Value="{DynamicResource BodyFont}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ComboBoxItem">
+                                                            <Border x:Name="bd" Background="Transparent" CornerRadius="8" Margin="0,1" ClipToBounds="True">
+                                                                <Grid>
+                                                                    <Border x:Name="hoverOverlay" CornerRadius="8" Background="{DynamicResource SurfaceHoverBrush}" Opacity="0"/>
+                                                                    <Border x:Name="checkOverlay" CornerRadius="8" Background="{DynamicResource SelectBgBrush}" Opacity="0"/>
+                                                                    <Grid Margin="{TemplateBinding Padding}">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="22"/><ColumnDefinition Width="*"/>
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <Path x:Name="selectedMark" Data="M 0 4 L 3 7 L 8 1" Opacity="0"
+                                                                              Stroke="{DynamicResource AccentInkBrush}" StrokeThickness="1.5"
+                                                                              StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"
+                                                                              VerticalAlignment="Center"/>
+                                                                        <ContentPresenter Grid.Column="1" VerticalAlignment="Center"/>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter Property="Foreground" Value="{DynamicResource AccentInkBrush}"/>
+                                                                    <Trigger.EnterActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="checkOverlay" Storyboard.TargetProperty="Opacity"
+                                                                                                 To="1" Duration="0:0:0.12"/>
+                                                                                <DoubleAnimation Storyboard.TargetName="selectedMark" Storyboard.TargetProperty="Opacity"
+                                                                                                 To="1" Duration="0:0:0.12"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </Trigger.EnterActions>
+                                                                    <Trigger.ExitActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="checkOverlay" Storyboard.TargetProperty="Opacity"
+                                                                                                 To="0" Duration="0:0:0.12"/>
+                                                                                <DoubleAnimation Storyboard.TargetName="selectedMark" Storyboard.TargetProperty="Opacity"
+                                                                                                 To="0" Duration="0:0:0.12"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </Trigger.ExitActions>
+                                                                </Trigger>
+                                                                <Trigger Property="IsHighlighted" Value="True">
+                                                                    <Trigger.EnterActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="hoverOverlay" Storyboard.TargetProperty="Opacity"
+                                                                                                 To="1" Duration="0:0:0.1"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </Trigger.EnterActions>
+                                                                    <Trigger.ExitActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="hoverOverlay" Storyboard.TargetProperty="Opacity"
+                                                                                                 To="0" Duration="0:0:0.1"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </Trigger.ExitActions>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ComboBox.ItemContainerStyle>
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+
+                            <StackPanel x:Name="LoopPanel" Grid.Row="5" Orientation="Horizontal" Margin="4,8,0,0">
+                                <Border Width="{Binding ActualWidth, ElementName=LblConvo}" Margin="0,0,12,0"/>
+                                <CheckBox x:Name="LoopSend" Content="循环发送" Style="{StaticResource LoopSendCheck}" IsChecked="False"
+                                          Checked="LoopSend_Changed" Unchecked="LoopSend_Changed" Loaded="LoopSend_Changed"
+                                          ToolTipService.ShowOnDisabled="True" ToolTipService.InitialShowDelay="400" ToolTipService.ShowDuration="30000">
+                                    <CheckBox.ToolTip>
+                                        <ToolTip x:Name="LoopHelpTip" Placement="MousePoint" HorizontalOffset="12" VerticalOffset="14" MaxWidth="364">
+                                            <TextBlock x:Name="LoopHelpText" TextWrapping="Wrap" MaxWidth="312" LineHeight="18"/>
+                                        </ToolTip>
+                                    </CheckBox.ToolTip>
+                                </CheckBox>
+                            </StackPanel>
+
+                            <!-- action row: unified result text at the LEFT of the buttons
+                                 (用户：运行/检测结果统一显示在按钮左侧) -->
+                            <Grid Grid.Row="7" Margin="0,12,8,6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="BtnStatus" Grid.Column="0" Text="" FontSize="12.5" TextWrapping="Wrap"
+                                           FontFamily="{DynamicResource BodyFont}" VerticalAlignment="Center"
+                                           TextAlignment="Right" Margin="8,0,16,0" Visibility="Collapsed"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button x:Name="BtnRecheck" Style="{StaticResource KeycapBtn}" Content="检测"
+                                            MinWidth="104" Margin="0,0,12,0" Click="BtnRecheck_Click"/>
+                                    <Button x:Name="BtnRun" Style="{StaticResource KeycapPrimary}" Content="运行"
+                                            MinWidth="104" Click="BtnRun_Click" IsEnabled="False" ToolTipService.ShowOnDisabled="True"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+
+            </Grid>
+            </ScrollViewer>
+
+            <!-- ============ inline settings mode ============ -->
+            <Grid x:Name="SettingsPage" Visibility="Collapsed">
+                <Grid.Resources>
+                    <Style x:Key="SettingsCategory" TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}">
+                        <Setter Property="FontSize" Value="17"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Margin" Value="4,0,0,10"/>
+                    </Style>
+                    <Style x:Key="FrequencyRadio" TargetType="RadioButton" BasedOn="{StaticResource SegRadio}">
+                        <Setter Property="MinHeight" Value="40"/>
+                        <Setter Property="Margin" Value="0,0,6,0"/>
+                        <Setter Property="Focusable" Value="True"/>
+                        <Setter Property="FocusVisualStyle" Value="{StaticResource SoftFocusCue}"/>
+                    </Style>
+                </Grid.Resources>
+                <ScrollViewer x:Name="SettingsScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                    <ScrollViewer.Resources><Style TargetType="ScrollBar" BasedOn="{StaticResource UpdateScrollBar}"/></ScrollViewer.Resources>
+                <StackPanel x:Name="SettingsContent" MaxWidth="1120" Margin="56,10,56,20">
+                    <TextBlock x:Name="LblGeneralSettings" Text="通用" Style="{StaticResource SettingsCategory}"/>
+                    <ContentControl x:Name="GeneralSettingsCard" Style="{StaticResource NeuCard}" Padding="28,4" Margin="0,0,0,16">
+                        <StackPanel>
+                        <Grid MinHeight="64">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/><ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="LblTheme" Text="主题" FontSize="14" FontWeight="SemiBold"
+                                       FontFamily="{DynamicResource UiFont}"
+                                       Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <RadioButton x:Name="ThemeSystem" Style="{StaticResource SegRadio}" GroupName="Theme"
+                                             Content="跟随系统" Checked="Theme_Checked"/>
+                                <RadioButton x:Name="ThemeLight" Style="{StaticResource SegRadio}" GroupName="Theme"
+                                             Content="浅色" Checked="Theme_Checked" Margin="6,0,0,0"/>
+                                <RadioButton x:Name="ThemeDark" Style="{StaticResource SegRadio}" GroupName="Theme"
+                                             Content="深色" Checked="Theme_Checked" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <Border Height="1" Background="{DynamicResource HairlineBrush}"/>
+                        <Grid MinHeight="64">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/><ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="LblAccent" Text="主题色" FontSize="14" FontWeight="SemiBold"
+                                       FontFamily="{DynamicResource UiFont}" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimaryBrush}"/>
+                            <WrapPanel x:Name="AccentOptions" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <RadioButton x:Name="AccentSystem" Style="{StaticResource SegRadio}" GroupName="Accent" Tag="system"
+                                             Content="跟随系统" MinHeight="42" Margin="0,0,6,0" Checked="Accent_Checked"/>
+                                <RadioButton Style="{StaticResource SegRadio}" GroupName="Accent" Tag="blue"
+                                             MinHeight="42" Margin="0,0,6,0" Checked="Accent_Checked">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="11" Height="11" Fill="#3563D9" Margin="0,0,9,0"
+                                                 Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" StrokeThickness="1"/>
+                                        <TextBlock Text="蓝色" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Style="{StaticResource SegRadio}" GroupName="Accent" Tag="black"
+                                             MinHeight="42" Margin="0,0,6,0" Checked="Accent_Checked">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="11" Height="11" Fill="#252930" Margin="0,0,9,0"
+                                                 Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" StrokeThickness="1"/>
+                                        <TextBlock Text="黑色" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Style="{StaticResource SegRadio}" GroupName="Accent" Tag="green"
+                                             MinHeight="42" Margin="0,0,6,0" Checked="Accent_Checked">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="11" Height="11" Fill="#255C47" Margin="0,0,9,0"
+                                                 Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" StrokeThickness="1"/>
+                                        <TextBlock Text="深绿" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Style="{StaticResource SegRadio}" GroupName="Accent" Tag="gray"
+                                             MinHeight="42" Margin="0,0,6,0" Checked="Accent_Checked">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="11" Height="11" Fill="#DEE4EC" Margin="0,0,9,0"
+                                                 Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" StrokeThickness="1"/>
+                                        <TextBlock Text="浅灰" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Style="{StaticResource SegRadio}" GroupName="Accent" Tag="pink"
+                                             MinHeight="42" Margin="0,0,0,0" Checked="Accent_Checked">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="11" Height="11" Fill="#F0AFCB" Margin="0,0,9,0"
+                                                 Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" StrokeThickness="1"/>
+                                        <TextBlock Text="粉色" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                            </WrapPanel>
+                        </Grid>
+                        <Border Height="1" Background="{DynamicResource HairlineBrush}"/>
+                        <Grid MinHeight="64">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="160"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <TextBlock x:Name="LblTransparency" Text="透明效果" FontSize="14" FontWeight="SemiBold"
+                                       FontFamily="{DynamicResource UiFont}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <RadioButton x:Name="TransparencyOff" Style="{StaticResource SegRadio}" GroupName="Transparency"
+                                             Content="关闭" Checked="Transparency_Checked"/>
+                                <RadioButton x:Name="TransparencyOn" Style="{StaticResource SegRadio}" GroupName="Transparency"
+                                             Content="开启" Checked="Transparency_Checked" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <Border Height="1" Background="{DynamicResource HairlineBrush}"/>
+                        <Grid MinHeight="64">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/><ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="LblLang" Text="语言" FontSize="14" FontWeight="SemiBold"
+                                       FontFamily="{DynamicResource UiFont}"
+                                       Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <RadioButton x:Name="LangSystem" Style="{StaticResource SegRadio}" GroupName="Lang"
+                                             Content="跟随系统" Checked="Lang_Checked"/>
+                                <RadioButton x:Name="LangZh" Style="{StaticResource SegRadio}" GroupName="Lang"
+                                             Content="简体中文" Checked="Lang_Checked" Margin="6,0,0,0"/>
+                                <RadioButton x:Name="LangEn" Style="{StaticResource SegRadio}" GroupName="Lang"
+                                             Content="English" Checked="Lang_Checked" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        </StackPanel>
+                    </ContentControl>
+                    <TextBlock x:Name="LblConnectionSettings" Text="连接" Style="{StaticResource SettingsCategory}"/>
+                    <ContentControl x:Name="ConnectionSettingsCard" Style="{StaticResource NeuCard}" Padding="28,14" Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/><ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Top" Margin="0,10,16,0">
+                                <TextBlock x:Name="LblDetectionFrequency" Text="检测频率" FontSize="14" FontWeight="SemiBold"
+                                           FontFamily="{DynamicResource UiFont}" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                <TextBlock x:Name="FrequencyApplied" FontSize="12.5" Margin="0,12,0,0" Opacity="0"
+                                           FontFamily="{DynamicResource UiFont}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="LblIdleFrequency" Text="待机时" FontSize="13.5"
+                                               FontFamily="{DynamicResource UiFont}" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    <UniformGrid x:Name="IdleFrequencyOptions" Grid.Column="1" Rows="1" Columns="5" Width="480" HorizontalAlignment="Right">
+                                        <RadioButton x:Name="Idle60" Style="{StaticResource FrequencyRadio}" GroupName="IdleFrequency"
+                                                     Tag="60" Content="1分钟" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Idle180" Style="{StaticResource FrequencyRadio}" GroupName="IdleFrequency"
+                                                     Tag="180" Content="3分钟" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Idle300" Style="{StaticResource FrequencyRadio}" GroupName="IdleFrequency"
+                                                     Tag="300" Content="5分钟" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Idle600" Style="{StaticResource FrequencyRadio}" GroupName="IdleFrequency"
+                                                     Tag="600" Content="10分钟" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Idle1800" Style="{StaticResource FrequencyRadio}" GroupName="IdleFrequency"
+                                                     Tag="1800" Content="30分钟" Margin="0" Checked="DetectionFrequency_Checked"/>
+                                    </UniformGrid>
+                                </Grid>
+                                <TextBlock x:Name="IdleFrequencyHint" FontSize="12.5" Margin="0,6,0,0" TextWrapping="Wrap"
+                                           FontFamily="{DynamicResource BodyFont}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                <Border Height="1" Background="{DynamicResource HairlineBrush}" Margin="0,14,0,14"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="LblRunningFrequency" Text="运行时" FontSize="13.5"
+                                               FontFamily="{DynamicResource UiFont}" VerticalAlignment="Center"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    <UniformGrid x:Name="RunningFrequencyOptions" Grid.Column="1" Rows="1" Columns="5" Width="480" HorizontalAlignment="Right">
+                                        <RadioButton x:Name="Running0" Style="{StaticResource FrequencyRadio}" GroupName="RunningFrequency"
+                                                     Tag="0" Content="实时" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Running30" Style="{StaticResource FrequencyRadio}" GroupName="RunningFrequency"
+                                                     Tag="30" Content="30秒" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Running60" Style="{StaticResource FrequencyRadio}" GroupName="RunningFrequency"
+                                                     Tag="60" Content="1分钟" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Running180" Style="{StaticResource FrequencyRadio}" GroupName="RunningFrequency"
+                                                     Tag="180" Content="3分钟" Checked="DetectionFrequency_Checked"/>
+                                        <RadioButton x:Name="Running300" Style="{StaticResource FrequencyRadio}" GroupName="RunningFrequency"
+                                                     Tag="300" Content="5分钟" Margin="0" Checked="DetectionFrequency_Checked"/>
+                                    </UniformGrid>
+                                </Grid>
+                                <TextBlock x:Name="RunningFrequencyHint" FontSize="12.5" Margin="0,6,0,0" TextWrapping="Wrap"
+                                           FontFamily="{DynamicResource BodyFont}"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </ContentControl>
+                    <TextBlock x:Name="LblAboutSettings" Text="关于" Style="{StaticResource SettingsCategory}"/>
+                    <ContentControl x:Name="AboutSettingsCard" Style="{StaticResource NeuCard}" Padding="28,14">
+                        <Grid MinHeight="22">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="LblVersion" Text="版本" FontSize="14" FontWeight="SemiBold"
+                                       FontFamily="{DynamicResource UiFont}" Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,16,0">
+                                <TextBlock x:Name="ValVersion" FontSize="14" FontFamily="{DynamicResource UiFont}" Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="UpdateCheckStatus" FontSize="12.5" Margin="16,0,0,0" MaxWidth="300" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button x:Name="BtnCheckUpdates" Grid.Column="2" Style="{StaticResource NeuBtn}" Height="34" MinWidth="104" Padding="16,0" Click="BtnCheckUpdates_Click"/>
+                        </Grid>
+                    </ContentControl>
+                </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- ============ inline send-log mode ============ -->
+            <Grid x:Name="LogPage" Visibility="Collapsed" MaxWidth="1280">
+                <ContentControl Style="{StaticResource NeuCard}" Margin="20,6,20,20" Padding="24,20">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0,0,0,16">
+                            <TextBlock x:Name="TitleLog" Text="发送日志" Style="{StaticResource SectionTitle}"
+                                       VerticalAlignment="Center"/>
+                            <Button x:Name="BtnClearLog" Style="{StaticResource NeuBtn}" Content="清空"
+                                    Height="36" Padding="16,0" HorizontalAlignment="Right" Click="BtnClearLog_Click"/>
+                        </Grid>
+                        <Border Grid.Row="1" Background="{DynamicResource CanvasBrush}" CornerRadius="12">
+                            <Grid>
+                                <TextBlock x:Name="LogEmptyHint" Text="暂无日志" FontSize="13"
+                                           FontFamily="{DynamicResource BodyFont}" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                <ScrollViewer x:Name="LogScroll" VerticalScrollBarVisibility="Auto" Padding="18,14">
+                                    <StackPanel x:Name="LogList"/>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ContentControl>
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="UpdatePage" Grid.Row="1" Grid.RowSpan="2" Panel.ZIndex="10" Visibility="Collapsed" Background="{DynamicResource PageCanvasBrush}">
+            <Grid x:Name="UpdateContent" MaxWidth="1280">
+            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <Grid Margin="20,12,20,18">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="BtnUpdateBack" Style="{StaticResource UpdateIconButton}" Width="36" Height="36" Click="BtnUpdateBack_Click">
+                        <Path Width="18" Height="18" Stretch="Uniform" Data="M 11,3 L 4,10 L 11,17 M 4,10 L 19,10"
+                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.8" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round"/>
+                    </Button>
+                    <TextBlock x:Name="UpdatePageTitle" FontSize="21" FontWeight="Bold" FontFamily="{DynamicResource UiFont}"
+                               Foreground="{DynamicResource TextPrimaryBrush}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Button x:Name="BtnDownloadUpdate" Grid.Column="1" Style="{StaticResource KeycapPrimary}" MinWidth="112" Click="BtnDownloadUpdate_Click" ToolTipService.ShowOnDisabled="True"/>
+            </Grid>
+            <StackPanel x:Name="UpdateDownloadFeedback" Grid.Row="1" Margin="44,0,44,16" Visibility="Collapsed">
+                <TextBlock x:Name="UpdateDownloadStatus" FontSize="12.5" Foreground="{DynamicResource TextSecondaryBrush}" TextWrapping="Wrap"/>
+                <Border Height="4" CornerRadius="2" Background="{DynamicResource TrackBrush}" Margin="0,8,0,0" ClipToBounds="True">
+                    <Border x:Name="UpdateDownloadFill" CornerRadius="2" Background="{DynamicResource AccentBrush}" RenderTransformOrigin="0,0.5">
+                        <Border.RenderTransform><ScaleTransform ScaleX="0"/></Border.RenderTransform>
+                    </Border>
+                </Border>
+            </StackPanel>
+            <ContentControl Grid.Row="2" Style="{StaticResource NeuCard}" Margin="20,0,20,20" Padding="26,22">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                    <TextBlock x:Name="UpdateReleaseTitle" FontSize="19" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap" Margin="0,0,0,18"/>
+                    <FlowDocumentScrollViewer x:Name="UpdateNotes" Grid.Row="1" IsToolBarVisible="False" Background="Transparent"
+                                              BorderThickness="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <FlowDocumentScrollViewer.Resources>
+                            <Style TargetType="ScrollBar" BasedOn="{StaticResource UpdateScrollBar}"/>
+                        </FlowDocumentScrollViewer.Resources>
+                    </FlowDocumentScrollViewer>
+                    <TextBlock x:Name="UpdateReleaseDate" Grid.Row="2" FontSize="12.5" Foreground="{DynamicResource TextSecondaryBrush}"
+                               HorizontalAlignment="Right" Margin="0,16,0,0"/>
+                </Grid>
+            </ContentControl>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="UpdateToast" Grid.RowSpan="3" Panel.ZIndex="20" Width="380" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,20" Visibility="Collapsed">
+            <Border CornerRadius="14" Background="{DynamicResource PillBrush}">
+                <Border.Effect><DropShadowEffect Color="#1A2233" Direction="270" ShadowDepth="5" BlurRadius="18" Opacity="0.16"/></Border.Effect>
+            </Border>
+            <Border CornerRadius="14" Background="{DynamicResource PillBrush}" BorderBrush="Transparent" BorderThickness="1"/>
+            <Button x:Name="BtnUpdateToastOpen" Style="{StaticResource UpdateToastButton}" Padding="20,18,44,18" Click="BtnUpdateToastOpen_Click">
+                <StackPanel>
+                    <TextBlock x:Name="UpdateToastTitle" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock x:Name="UpdateToastSubtitle" FontSize="12.5" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnUpdateToastClose" Style="{StaticResource UpdateIconButton}" Width="26" Height="26" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,7,7,0" Click="BtnUpdateToastClose_Click">
+                <TextBlock Text="&#xE8BB;" FontFamily="Segoe Fluent Icons, Segoe UI" FontSize="9"/>
+            </Button>
+        </Grid>
+
+        <!-- ============ splash (first screen) ============ -->
+        <Grid x:Name="SplashPage" Grid.Row="1" Grid.RowSpan="2" Panel.ZIndex="6"
+              Background="{DynamicResource PageCanvasBrush}">
+            <!-- text shadow = blurred sibling copy behind; the live glyphs never carry an
+                 Effect (Effect 包字=渲虚) so ClearType stays crisp -->
+            <TextBlock x:Name="SplashTitleShadow" Text="{Binding Text, ElementName=SplashTitle}"
+                       FontFamily="./Fonts/#YEFONT Color Fonts0831 Color1" FontSize="70"
+                       Foreground="#2E1A2233" IsHitTestVisible="False" Opacity="0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,150">
+                <TextBlock.RenderTransform><TranslateTransform Y="2.2"/></TextBlock.RenderTransform>
+                <TextBlock.Effect><BlurEffect Radius="4.5"/></TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="SplashTitle" Text="Codex-Continue" Opacity="0"
+                       FontFamily="./Fonts/#YEFONT Color Fonts0831 Color1" FontSize="70"
+                       Foreground="{DynamicResource TextPrimaryBrush}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,150"/>
+            <!-- same anchor as ConnectPage's retry button: identical margins = identical seat -->
+            <Button x:Name="BtnStart" Style="{StaticResource KeycapPrimary}"
+                    Content="启动" Width="116" Height="44" FontSize="15" Opacity="0"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,382,0,0"
+                    Click="BtnStart_Click"/>
+        </Grid>
+
+        <!-- ============ connect (searching / retry) ============ -->
+        <Grid x:Name="ConnectPage" Grid.Row="1" Grid.RowSpan="2" Panel.ZIndex="5"
+              Background="{DynamicResource PageCanvasBrush}" Visibility="Collapsed">
+            <Grid x:Name="ConnectHeading" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,190,0,0">
+                <!-- text shadow = blurred sibling copy behind (Effect never wraps live glyphs);
+                     small text gets NO shadow — at 13-14px the blur bleeds into the strokes -->
+                <TextBlock Text="{Binding Text, ElementName=ConnectTitle}"
+                           FontSize="{Binding FontSize, ElementName=ConnectTitle}" FontWeight="Bold" FontFamily="./Fonts/#HYSongYunLangHeiW"
+                           Foreground="#2E1A2233" IsHitTestVisible="False"
+                           HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform><TranslateTransform Y="1.4"/></TextBlock.RenderTransform>
+                    <TextBlock.Effect><BlurEffect Radius="3"/></TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="ConnectTitle" FontSize="38" FontWeight="Bold"
+                           FontFamily="./Fonts/#HYSongYunLangHeiW"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
+                           HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Grid>
+            <!-- Win10 boot ring (windows_10.css verbatim): 5 dots orbiting, centred -->
+            <Viewbox x:Name="LoadDotsHost" Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,300,0,0">
+                <Canvas x:Name="LoadDots" Width="160" Height="160" ClipToBounds="True"
+                        SnapsToDevicePixels="False" UseLayoutRounding="False"/>
+            </Viewbox>
+            <!-- small text: 14px = 21 physical px at 150% (whole-pixel em), ClearType+Ideal -->
+            <TextBlock x:Name="ConnectMsg" FontSize="14"
+                       FontFamily="Microsoft YaHei UI, Microsoft YaHei"
+                       Foreground="{DynamicResource TextTertiaryBrush}"
+                       TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,28"/>
+            <!-- curvy-crab-71 (Uiverse by biswacpcode): twin bars sweep in from opposite
+                 edges on hover, framing the text; text adapts to theme ink -->
+            <!-- hit zone pads out past the glyphs (Background=Transparent makes the
+                 whole pad hoverable); inner margin + the tighter outer margin keep
+                 the text at its original corner seat (right 32 / bottom 28) -->
+            <Grid x:Name="SkipWrap" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                  Margin="0,0,18,16" Background="Transparent" MouseLeftButtonUp="SkipLink_Click"
+                  MouseEnter="SkipWrap_MouseEnter" MouseLeave="SkipWrap_MouseLeave">
+                <StackPanel Margin="14,12">
+                    <!-- curvy-crab-71 verbatim: bars hug the text (display:block, no
+                         margin); top bar right-anchored grows leftward, bottom grows right -->
+                    <Border x:Name="SkipBarTop" Height="2" Background="{DynamicResource AccentBrush}" HorizontalAlignment="Right" Width="{Binding ActualWidth, ElementName=SkipLink}"
+                            RenderTransformOrigin="1,0.5">
+                        <Border.RenderTransform><ScaleTransform ScaleX="0"/></Border.RenderTransform>
+                    </Border>
+                    <TextBlock x:Name="SkipLink" Text="跳过" FontSize="14" FontWeight="SemiBold"
+                               FontFamily="{DynamicResource BodyFont}"
+                               Foreground="{DynamicResource TextTertiaryBrush}"
+                               TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="ClearType"/>
+                    <Border x:Name="SkipBarBot" Height="2" Background="{DynamicResource AccentBrush}" HorizontalAlignment="Left" Width="{Binding ActualWidth, ElementName=SkipLink}"
+                            RenderTransformOrigin="0,0.5">
+                        <Border.RenderTransform><ScaleTransform ScaleX="0"/></Border.RenderTransform>
+                    </Border>
+                </StackPanel>
+            </Grid>
+            <Button x:Name="BtnLink" Style="{StaticResource KeycapPrimary}"
+                    Content="链接" Width="116" Height="44" FontSize="15"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,382,0,0"
+                    Visibility="Collapsed" Click="BtnLink_Click"/>
+        </Grid>
+
+        <!-- ============ hint dialog (offline run etc.) ============ -->
+        <Grid x:Name="HintDialog" Grid.RowSpan="3" Visibility="Collapsed" Panel.ZIndex="30">
+            <Border Background="#66000000"/>
+            <ContentControl Style="{StaticResource NeuCard}" Padding="28,24" Width="400"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock x:Name="HintTitle" Text="提示" FontSize="16" FontWeight="SemiBold"
+                               FontFamily="{DynamicResource UiFont}"
+                               Foreground="{DynamicResource TextPrimaryBrush}"/>
+                    <TextBlock x:Name="HintBody" Text="" FontSize="13" Margin="0,10,0,0"
+                               FontFamily="{DynamicResource BodyFont}" TextWrapping="Wrap"
+                               Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,22,0,0">
+                        <Button x:Name="HintCancel" Style="{StaticResource NeuBtn}" Content="取消"
+                                MinWidth="88" Visibility="Collapsed" Click="HintCancel_Click"/>
+                        <Button x:Name="HintOk" Style="{StaticResource NeuBtn}" Content="确定"
+                                MinWidth="88" Margin="12,0,0,0" Click="HintOk_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ContentControl>
+        </Grid>
+
+    </Grid>
+</Window>

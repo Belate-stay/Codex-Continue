@@ -1,0 +1,31 @@
+# 构建产物
+bin/
+obj/
+*.user
+.vs/
+
+# 发布/打包产物（GitHub Release 走附件，不进源码库）
+/publish/
+/release/
+
+# 过程稿与取证（只留本地，不入库）
+/_backups/
+/_shots/
+/_research/
+/src/.research-tmp/
+/src/_research/
+/src/*.tar.gz
+/src/[fghnp]_*.png
+/_progress_1030.md
+
+# 临时探针工程（含 bin/obj 与 csv 输出）
+/.dot-probe/
+/.dot-probe6/
+/.verify-probe/
+
+# 探针运行输出（脚本 .cs/.ps1/.py 保留，日志输出不入库）
+/probe/*.log
+/probe/*.out
+/probe/*.csv
+/probe/*.png
+/probe/*.txt
